@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>reaction tester</title>
+
+    <style type="text/css">
+
+        #box{
+            width:100px;
+            height:100px;
+            background-color: blue;
+            /* display: none; */
+            position: relative;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Test your reaction:</h1>
+    <p> Your time : <span id ="timetaken"></span></p>
+
+    <div id = "box">
+
+    </div>
+
+
+
+
+    <script type ="text/javascript">
+
+        var start =new Date().getTime();
+        function setcolor(){
+            var list =["0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F"];
+            var color = "#";
+            for(i=1;i<=6;i++)
+            {
+                color+=list[Math.floor(Math.random()*16)];
+            }
+            return color;
+        }        
+
+        function makeShape(){
+            var top = Math.random()*400;
+            var left = Math.random()*400;
+            var bod = Math.random()*51;
+
+            document.getElementById("box").style.backgroundColor = setcolor();
+            document.getElementById("box").style.top = top+"px";
+            document.getElementById("box").style.left = left+"px";
+            document.getElementById("box").style.width = "100px";
+            document.getElementById("box").style.height = "100px";
+            document.getElementById("box").style.borderRadius = bod+"px";
+            document.getElementById("box").style.display = "block";
+            start = new Date().getTime();
+
+        }
+        function afterClick(){
+            setTimeout(makeShape(),1000);
+        }
+        afterClick();
+        document.getElementById("box").onclick = function(){
+            document.getElementById("box").style.display = "none";
+            var end = new Date().getTime();
+            var t = (end - start)/1000;
+            document.getElementById("timetaken").innerHTML = t + "sec";
+            afterClick();
+
+        }
+
+    </script>
+
+</body>
+</html>
